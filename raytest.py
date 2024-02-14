@@ -15,6 +15,11 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
+thisisatest5 = (52, 71 ,74)
+thisisatest6 = (21, 21 ,83)
+thisisatest7 = (67, 24 ,25)
+thisisatest8 = (1, 12 ,56)
+thisisatest9 = (53, 3 ,25)
 
 # Define color mappings based on map data
 COLOR_MAP = {
@@ -22,14 +27,19 @@ COLOR_MAP = {
     '1': BLACK,
     '2': RED,
     '3': GREEN,
-    '4': BLUE
+    '4': BLUE,
+    '5': thisisatest5,
+    '6': thisisatest6,
+    '7': thisisatest7,
+    '8': thisisatest8,
+    '9': thisisatest9
 }
 
 # Define player parameters
 player_pos = [WIDTH / 2, HEIGHT / 2]
 player_angle = 0
 FOV = math.pi / 2
-NUM_RAYS = 15
+NUM_RAYS = 30
 RAY_ANGLE_INCREMENT = FOV / NUM_RAYS
 
 # Load map from file
@@ -98,16 +108,26 @@ while running:
 
     # Player controls
     keys = pygame.key.get_pressed()
+    movement_speed = 2  # Adjust this as needed
+    rotation_speed = 0.05  # Adjust this as needed
     if keys[pygame.K_LEFT]:
-        player_angle -= 0.05
+        player_angle -= rotation_speed
     if keys[pygame.K_RIGHT]:
-        player_angle += 0.05
+        player_angle += rotation_speed
+    if keys[pygame.K_UP]:
+        # Move the player in the direction they are facing
+        player_pos[0] += math.cos(player_angle) * movement_speed
+        player_pos[1] += math.sin(player_angle) * movement_speed
+    if keys[pygame.K_DOWN]:
+        # Move the player backward (opposite direction they are facing)
+        player_pos[0] -= math.cos(player_angle) * movement_speed
+        player_pos[1] -= math.sin(player_angle) * movement_speed
 
     # Cast rays
     cast_rays()
 
     # Draw player
-    pygame.draw.circle(screen, RED, (int(player_pos[0]), int(player_pos[1])), 5)
+    pygame.draw.circle(screen, RED, (int(player_pos[0]), int(player_pos[1])), 0)
 
     pygame.display.flip()
 

@@ -20,8 +20,14 @@ BLUE = 4
 
 # Button parameters
 BUTTON_WIDTH, BUTTON_HEIGHT = 100, 40
-SAVE_BUTTON_POS = (10, 10)
-LOAD_BUTTON_POS = (120, 10)
+MENU_WIDTH = 150
+MENU_X = WIDTH - MENU_WIDTH
+BUTTON_X = MENU_X + 25
+BUTTON_MARGIN = 10
+BUTTON_START_Y = 50
+
+SAVE_BUTTON_POS = (BUTTON_X, BUTTON_START_Y)
+LOAD_BUTTON_POS = (BUTTON_X, BUTTON_START_Y + BUTTON_HEIGHT + BUTTON_MARGIN)
 SAVE_BUTTON_COLOR = (50, 205, 50)  # LimeGreen
 LOAD_BUTTON_COLOR = (65, 105, 225)  # RoyalBlue
 
@@ -115,6 +121,9 @@ while running:
             
             pygame.draw.rect(screen, color, (x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
             pygame.draw.rect(screen, BLACK, (x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE), 1)
+
+    # Draw menu background
+    pygame.draw.rect(screen, (200, 200, 200), (MENU_X, 0, MENU_WIDTH, HEIGHT))
 
     # Draw buttons
     save_button.draw(screen, BLACK)
